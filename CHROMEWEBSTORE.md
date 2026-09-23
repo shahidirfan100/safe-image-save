@@ -117,4 +117,4 @@ Add the final support issue tracker or email before submission.
 - Cross-origin rules may prevent conversion for some sites.
 - AVIF is enabled only when the browser returns an actual AVIF blob.
 - Exporting an animated GIF to another format saves the first frame.
-- Public source repository, privacy-policy URL, publisher identity, and store screenshots are still manual release tasks.
+- A public privacy-policy URL, publisher identity, support contact, dashboard listing entry, and final screenshot upload remain manual release steps.
