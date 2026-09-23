@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Safe Image Save · Privacy</title>
+    <link rel="stylesheet" href="about.css">
+  </head>
+  <body>
+    <main class="page">
+      <a class="back-link" href="popup/popup.html">Back to settings</a>
+      <p class="eyebrow">SAFE IMAGE SAVE</p>
+      <h1>A small image tool with a clear boundary.</h1>
+      <p class="lede">Safe Image Save converts the image you explicitly choose from the right-click menu. The conversion happens inside your browser, then the browser downloads the result to your device.</p>
+
+      <section class="card">
+        <h2>What it does</h2>
+        <ul>
+          <li>Offers PNG, JPG, WebP, and AVIF when the browser can encode them.</li>
+          <li>Uses your saved quality and filename preferences.</li>
+          <li>Keeps a small local history that you can clear at any time.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>What it does not do</h2>
+        <ul>
+          <li>It does not upload images to a conversion service.</li>
+          <li>It does not inject affiliate links, ads, or analytics.</li>
+          <li>It does not scan every image on a page in the background.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Honest limits</h2>
+        <p>Some sites block pixel access to their images. Those images cannot be converted locally without weakening the extension's permission boundary. Animated GIFs are exported as a still first frame when you choose another format. AVIF depends on the browser's encoder.</p>
+      </section>
+
+      <section class="card">
+        <h2>Permissions, in plain English</h2>
+        <dl>
+          <dt>Active tab + scripting</dt><dd>Run the conversion only after your right-click action on the current page.</dd>
+          <dt>Context menus</dt><dd>Add the Safe Image Save submenu to image right-click menus.</dd>
+          <dt>Downloads</dt><dd>Send the converted file to the browser's normal download flow.</dd>
+          <dt>Storage</dt><dd>Keep your preferences and optional recent-save list on this device.</dd>
+          <dt>Alarms</dt><dd>Clear the small success or error badge after it has been shown.</dd>
+        </dl>
+      </section>
+
+      <footer>Public source repository link: add it in <code>shared/constants.js</code> before publishing.</footer>
+    </main>
+  </body>
+</html>

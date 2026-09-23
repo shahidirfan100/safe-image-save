@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Safe Image Save</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img src="../icons/icon-48.png" alt="" width="36" height="36">
+          <div>
+            <p class="eyebrow">SAFE IMAGE SAVE</p>
+            <h1>Save the way you need.</h1>
+          </div>
+        </div>
+        <span id="extension-version" class="version">—</span>
+      </header>
+
+      <section class="trust-card" aria-label="Privacy status">
+        <div class="status-dot" aria-hidden="true"></div>
+        <div>
+          <strong>Local only</strong>
+          <p>Your image stays in your browser. No account, uploads, or tracking.</p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">RIGHT-CLICK MENU</p>
+            <h2>Quick defaults</h2>
+          </div>
+          <span class="hint">Choose the format on the image</span>
+        </div>
+
+        <label class="field-label" for="default-format">Preferred format</label>
+        <select id="default-format" class="select-control">
+          <option value="png">PNG</option>
+          <option value="jpg">JPG</option>
+          <option value="webp">WebP</option>
+          <option value="avif">AVIF (when supported)</option>
+        </select>
+
+        <div class="range-row">
+          <label class="field-label" for="quality">JPG/WebP quality</label>
+          <output id="quality-value" for="quality">90%</output>
+        </div>
+        <input id="quality" class="range-control" type="range" min="10" max="100" step="5" value="90">
+        <div class="range-ends"><span>Smaller file</span><span>More detail</span></div>
+
+        <label class="field-label" for="filename-rule">Filename</label>
+        <select id="filename-rule" class="select-control">
+          <option value="original">Keep original name</option>
+          <option value="page-title">Use page title</option>
+          <option value="hostname-date">Site name + date</option>
+        </select>
+      </section>
+
+      <section class="section-block history-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ON THIS DEVICE</p>
+            <h2>Recent saves</h2>
+          </div>
+          <button id="clear-history" class="text-button" type="button">Clear</button>
+        </div>
+        <label class="switch-row" for="history-enabled">
+          <span>
+            <strong>Keep a local history</strong>
+            <small>Only filenames, formats, and site names are stored.</small>
+          </span>
+          <input id="history-enabled" type="checkbox">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <div id="history-list" class="history-list" aria-live="polite"></div>
+      </section>
+
+      <footer class="footer-links">
+        <a href="../about.html" target="_blank">Privacy & limits</a>
+        <span aria-hidden="true">·</span>
+        <a id="source-link" href="#" target="_blank">Source repository</a>
+      </footer>
+      <p id="save-status" class="save-status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

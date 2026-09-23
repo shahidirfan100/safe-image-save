@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="240" viewBox="0 0 960 240" role="img" aria-labelledby="title desc">
+  <title id="title">Safe Image Save logo</title>
+  <desc id="desc">A dark file tile with a green and orange save mark beside the Safe Image Save wordmark.</desc>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#172744"/>
+      <stop offset="1" stop-color="#0b1325"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="960" height="240" rx="40" fill="#0f172a"/>
+  <g filter="url(#shadow)">
+    <rect x="38" y="38" width="164" height="164" rx="42" fill="url(#tile)" stroke="#263756" stroke-width="5"/>
+    <path d="M77 80v82M77 80h79M77 121h56" fill="none" stroke="#22c55e" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M156 80v30M133 121v41" fill="none" stroke="#f97316" stroke-width="15" stroke-linecap="round"/>
+  </g>
+  <text x="250" y="111" fill="#f8fafc" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="58" font-weight="800" letter-spacing="-2">Safe Image Save</text>
+  <text x="254" y="157" fill="#a7f3d0" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="24" font-weight="600" letter-spacing="1">LOCAL CONVERSION. CLEAR BOUNDARIES.</text>
+</svg>

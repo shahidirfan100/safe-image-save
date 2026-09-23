@@ -1,0 +1,9 @@
+{
+  "name": "safe-image-save",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/test.mjs && node tests/context-menu-manager.test.mjs",
+    "check": "node tests/check.mjs"
+  }
+}
