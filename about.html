@@ -33,21 +33,22 @@
 
       <section class="card">
         <h2>Honest limits</h2>
-        <p>Some sites block pixel access to their images. Those images cannot be converted locally without weakening the extension's permission boundary. Animated GIFs are exported as a still first frame when you choose another format. AVIF depends on the browser's encoder.</p>
+        <p>For images on X's <code>pbs.twimg.com</code> CDN, Chrome asks for optional access after you select an image. If allowed, the extension fetches only that image without cookies or a page referrer, then converts it locally. Other protected sites may block conversion. Animated GIFs are exported as a still first frame, AVIF depends on the browser's encoder, and very large images are refused to limit memory use.</p>
       </section>
 
       <section class="card">
         <h2>Permissions, in plain English</h2>
         <dl>
-          <dt>Active tab + scripting</dt><dd>Run the conversion only after your right-click action on the current page.</dd>
+          <dt>Active tab + scripting</dt><dd>Read the selected page for conversion and show feedback only after your right-click action.</dd>
           <dt>Context menus</dt><dd>Add the Safe Image Save submenu to image right-click menus.</dd>
           <dt>Downloads</dt><dd>Send the converted file to the browser's normal download flow.</dd>
           <dt>Storage</dt><dd>Keep your preferences and optional recent-save list on this device.</dd>
           <dt>Alarms</dt><dd>Clear the small success or error badge after it has been shown.</dd>
+          <dt>X image CDN (optional)</dt><dd>After you choose an X image, read that image from <code>pbs.twimg.com</code> without cookies or a page referrer so conversion stays local.</dd>
         </dl>
       </section>
 
-      <footer>Public source repository link: add it in <code>shared/constants.js</code> before publishing.</footer>
+      <footer><a href="https://github.com/shahidirfan100/safe-image-save" target="_blank" rel="noreferrer">View the public source repository</a></footer>
     </main>
   </body>
 </html>

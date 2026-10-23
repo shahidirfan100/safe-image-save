@@ -53,6 +53,15 @@ export function hostnameFromUrl(sourceUrl) {
   }
 }
 
+export function isXImageUrl(sourceUrl) {
+  try {
+    const url = new URL(sourceUrl);
+    return url.protocol === 'https:' && url.hostname === 'pbs.twimg.com';
+  } catch {
+    return false;
+  }
+}
+
 export function buildFilename({ sourceUrl, pageTitle, format, filenameRule, now = new Date() }) {
   const date = now.toISOString().slice(0, 10);
   let base = sourceBaseName(sourceUrl);

@@ -4,16 +4,23 @@ export function createContextMenuSetup({ removeAll, create, items }) {
   return function setupContextMenus() {
     if (setupInFlight) return setupInFlight;
 
-    const setup = (async () => {
-      await removeAll();
-      for (const item of items) await create(item);
-    })();
+    let runSetup;
+    const setup = new Promise((resolve, reject) => {
+      runSetup = async () => {
+        try {
+          await removeAll();
+          for (const item of items) await create(item);
+          resolve();
+        } catch (error) {
+          reject(error);
+        } finally {
+          if (setupInFlight === setup) setupInFlight = null;
+        }
+      };
+    });
 
     setupInFlight = setup;
-    const clearInFlight = () => {
-      if (setupInFlight === setup) setupInFlight = null;
-    };
-    setup.then(clearInFlight, clearInFlight);
+    void runSetup();
     return setup;
   };
 }

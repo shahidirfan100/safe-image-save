@@ -1,6 +1,8 @@
 export const SETTINGS_KEY = 'settings';
 export const BADGE_CLEAR_ALARM = 'clear-status-badge';
 export const MAX_HISTORY_ITEMS = 8;
+export const MAX_IMAGE_BYTES = 50 * 1024 * 1024;
+export const MAX_IMAGE_PIXELS = 40_000_000;
 
 export const FORMATS = {
   png: { label: 'PNG', extension: 'png', mime: 'image/png', lossy: false },

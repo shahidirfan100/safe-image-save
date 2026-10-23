@@ -13,9 +13,11 @@ The extension has one focused interaction: right-click an image, choose Safe Ima
 
 ## Known limits
 
-- Cross-origin rules can prevent a site image from being read into a local canvas. The extension reports that failure instead of downloading a mislabeled file.
+- On X, Chrome asks for optional access to `pbs.twimg.com` when you choose an image. If allowed, the extension requests only that image without cookies or a page referrer, then converts it locally. If access is denied, nothing is downloaded.
+- Other sites can block local pixel access. The extension reports that limit instead of downloading a mislabeled file; opening the image in a new tab may allow local conversion.
 - Choosing PNG, JPG, WebP, or AVIF for an animated GIF exports the first frame.
 - AVIF is capability-detected. If the browser does not return an AVIF blob, no file is downloaded.
+- Very large images are refused before canvas conversion to avoid excessive memory use.
 - Browser internal pages and some protected pages do not allow injected conversion code.
 
 ## Before public release

@@ -23,7 +23,9 @@ Install -> open a page -> right-click an image -> choose Safe Image Save -> choo
 
 Required: `activeTab`, `scripting`, `contextMenus`, `downloads`, `storage`, `alarms`.
 
-Intentionally omitted: host permissions, `tabs`, `notifications`, offscreen documents, web-accessible resources, and content scripts. This keeps the install warning narrow and makes the local-only claim match the code.
+Optional: `https://pbs.twimg.com/*`, requested only after the user selects an X image. The service worker fetches only that image with credentials omitted and no referrer so local canvas conversion can work when the page's CORS policy blocks it.
+
+Intentionally omitted: required host permissions, `tabs`, `notifications`, offscreen documents, web-accessible resources, and content scripts. The optional CDN access is never requested during installation.
 
 ## UX direction
 
@@ -35,7 +37,7 @@ Dark precision utility UI: navy background, green local-status signal, orange ut
 - Unit-test filename sanitizing, source-name extraction, filename rules, settings normalization, and format checks.
 - Verify manifest permissions, referenced files, and PNG magic bytes/dimensions.
 - Package only the extension source files into a ZIP and list its contents.
-- Manually load the unpacked extension in Chrome and test one same-origin image, one WebP/AVIF image, one cross-origin/protected image, one animated GIF, and an internal page.
+- Manually load the unpacked extension in Chrome and test X images with both permission acceptance and denial, one same-origin image, WebP/AVIF output, one cross-origin/protected image, one animated GIF, a very large image, and an internal page.
 - Manually confirm three conversions on Google Images, a WordPress media page, and a stock-asset page before calling runtime behavior verified.
 
 ## Validation decision
