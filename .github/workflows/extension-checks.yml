@@ -1,0 +1,37 @@
+name: Extension checks
+
+on:
+  push:
+    branches:
+      - main
+      - fix/x-image-save-and-menu-lifecycle
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: extension-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate extension
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run unit and lifecycle checks
+        run: npm test
+
+      - name: Check manifest, syntax, permissions, and assets
+        run: npm run check
