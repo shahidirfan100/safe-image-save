@@ -9,6 +9,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'u
 
 assert.equal(manifest.manifest_version, 3);
 assert.ok(!manifest.host_permissions, 'The MVP must not request host permissions.');
+assert.deepEqual(manifest.optional_host_permissions, ['https://pbs.twimg.com/*']);
 assert.ok(!manifest.content_scripts, 'The MVP must not install an always-on content script.');
 for (const file of Object.values(manifest.icons)) {
   assert.ok(fs.existsSync(path.join(root, file)), `Missing manifest icon: ${file}`);
@@ -23,7 +24,14 @@ assert.deepEqual(manifest.permissions, requiredPermissions);
 const converter = fs.readFileSync(path.join(root, 'shared/image-converter.js'), 'utf8');
 assert.match(converter, /canvas\.toBlob/);
 assert.match(converter, /blob\.type !== config\.mime/);
-assert.match(fs.readFileSync(path.join(root, 'popup/popup.html'), 'utf8'), /Local only/);
+assert.match(converter, /maxPixels = 40_000_000/);
+const serviceWorker = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');
+assert.match(serviceWorker, /credentials: 'omit'/);
+assert.match(serviceWorker, /referrerPolicy: 'no-referrer'/);
+assert.match(serviceWorker, /chrome\.permissions\.request\(\{ origins: \[X_IMAGE_ORIGIN\] \}\)/);
+assert.doesNotMatch(serviceWorker, /chrome\.runtime\.onStartup/);
+assert.match(serviceWorker, /url: result\.dataUrl/);
+assert.match(fs.readFileSync(path.join(root, 'popup/popup.html'), 'utf8'), /Local conversion/);
 
 for (const [size, file] of Object.entries(manifest.icons)) {
   const bytes = fs.readFileSync(path.join(root, file));

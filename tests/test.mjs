@@ -1,9 +1,13 @@
 import assert from 'node:assert/strict';
-import { buildFilename, mergeSettings, sanitizeFilename, sourceBaseName } from '../shared/utils.js';
+import { buildFilename, isXImageUrl, mergeSettings, sanitizeFilename, sourceBaseName } from '../shared/utils.js';
 
 assert.equal(sanitizeFilename(' a<>:"/\\|?*  '), 'a---------');
 assert.equal(sourceBaseName('https://example.com/assets/hero-image.webp?width=1200'), 'hero-image');
 assert.equal(sourceBaseName('not a url'), 'image');
+assert.equal(isXImageUrl('https://pbs.twimg.com/media/photo?format=jpg&name=large'), true);
+assert.equal(isXImageUrl('https://pbs.twimg.com.evil.example/media/photo'), false);
+assert.equal(isXImageUrl('http://pbs.twimg.com/media/photo?format=jpg'), false);
+assert.equal(isXImageUrl('https://x.com/media/photo'), false);
 
 const normalized = mergeSettings({
   defaultFormat: 'nope',

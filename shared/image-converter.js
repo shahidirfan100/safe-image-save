@@ -1,4 +1,4 @@
-export async function convertImageInPage(srcUrl, format, quality) {
+export async function convertImageInPage(srcUrl, format, quality, maxPixels = 40_000_000) {
   const config = {
     png: { mime: 'image/png' },
     jpg: { mime: 'image/jpeg' },
@@ -16,19 +16,24 @@ export async function convertImageInPage(srcUrl, format, quality) {
     const image = new Image();
     if (!source.startsWith('data:') && !source.startsWith('blob:')) image.crossOrigin = 'anonymous';
     image.decoding = 'async';
+    const loadPromise = new Promise((resolve, reject) => {
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', () => reject(new Error('The image could not be loaded for local conversion.')), { once: true });
+    });
     image.src = source;
-    if (image.complete && image.naturalWidth > 0) {
-      await image.decode().catch(() => undefined);
+    if (image.complete) {
+      if (!image.naturalWidth) return { ok: false, message: 'The image could not be loaded for local conversion.' };
     } else {
-      await new Promise((resolve, reject) => {
-        image.onload = resolve;
-        image.onerror = () => reject(new Error('The image could not be loaded for local conversion.'));
-      });
+      await loadPromise;
     }
+    await image.decode().catch(() => undefined);
 
     const width = image.naturalWidth;
     const height = image.naturalHeight;
     if (!width || !height) return { ok: false, message: 'The image has no readable dimensions.' };
+    if (width * height > maxPixels) {
+      return { ok: false, message: 'This image is too large for safe local conversion.' };
+    }
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
